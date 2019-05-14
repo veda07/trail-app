@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 
-mongoose.connect('mongodb://localhost/trails-app2', {
+mongoose.connect('mongodb://localhost/trails-app4', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Trails = require('../models/trails');
+const Trail = require('../models/trail');
 
 router.get('/', async (req, res) => {
     try {
         console.log(req.body)
-        const allTrails = await Trails.find();
+        const allTrails = await Trail.find();
         res.json({
             status:200,
             data: allTrails
