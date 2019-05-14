@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const trailSchema = new mongoose.Schema({
     name: String,
-    location: String,
+    lat: String,
+    log: String,
     review: String
 })
 
