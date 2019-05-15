@@ -4,8 +4,17 @@ const Trails = (props) => {
     const trailList = props.trails.map((trail)=>{
         return(
             <li key={trail._id}>
-            <span>{trail.name}</span>
-            <span>{trail.review}</span>
+            <span>{trail.name}</span><br/>
+            <span>{trail.review}</span><br/>
+            <button onClick={(e)=>{
+                e.preventDefault();
+                props.deleteTrail(trail._id);
+            }}>Delete</button> 
+            <button onClick={(e)=>{
+                e.preventDefault();
+                props.editTrail(trail._id);
+            }}>edit</button>
+            
             </li>
         )
         

@@ -13,9 +13,9 @@ class App extends Component {
   render() {
     return (
  
-        <div >
+        <div>
           <h1>Trails App </h1>
-          <TrailContainer/>
+          <TrailContainer showTrails={this.showTrails}/>
 
         </div>
     );

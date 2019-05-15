@@ -5,21 +5,24 @@ class CreateTrailForm extends Component {
         super();
         this.state = {
             name: '',
-            lat: '',
-            long: '',
-            review: ''
+            review: '',
+            location: {
+                lat: '',
+                long: ''
+            }
 
 
         }
     }
     handleChange = (e) =>{
         this.setState({
-            [e.target.name]:  e.target.value
+            location: { ...this.state.location, 
+        [e.target.name]:  e.target.value}
         })
     }
     render(){
         return(
-            <form onSubmit = {this.props.addTrail.bind(null, this.state)}>
+            <form onSubmit = {this.props.addTrail.bind(null, this.state.location)}>
             <h3>Trail Reviews</h3>
             <label>
                 Trail Name:
@@ -29,6 +32,11 @@ class CreateTrailForm extends Component {
             <label>
                 Review:
                 <input onChange={this.handleChange} type="text" name="review"/>
+             </label>
+             <label>
+                 Location:
+                 <input onChange={this.handleChange} placeholder="lat" type="text" name= "lat"/>
+                 <input onChange={this.handleChange} placeholder="log" type="text" name= "long"/>
              </label>
                 <input type="submit"/>
             </form>

@@ -52,7 +52,7 @@ router.get('/:id', async (req, res)=>{
 
 // edit/ update by id 
 
-router.put('/id:', async (req, res)=>{
+router.put('/:id', async (req, res)=>{
     try{
         const updatedTrail = await Trail.findByIdAndUpdate(req.params.id, req.body, {new: true});
             res.json({
@@ -65,9 +65,9 @@ router.put('/id:', async (req, res)=>{
     }
 })
 
-router.delete('/id:', async (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     try{
-        const deletedTrail = await Trail.findByIdAndDelete(req.params.id);
+        const deletedTrail = await Trail.findByIdAndRemove(req.params.id);
         res.json({
             status: 200,
             data: deletedTrail
