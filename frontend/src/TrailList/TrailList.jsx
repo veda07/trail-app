@@ -12,7 +12,7 @@ const Trails = (props) => {
             }}>Delete</button> 
             <button onClick={(e)=>{
                 e.preventDefault();
-                props.editTrail(trail._id);
+                props.openEdit(trail);
             }}>edit</button>
             
             </li>

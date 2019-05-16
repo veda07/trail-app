@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import CreateTrailForm from '../CreateTrail/CreateTrailForm';
 import Trails from '../TrailList/TrailList';
 import MapContainer from './mapsContainer/MapContainer';
+import EditTrail from '../CreateTrail/EditTrail/EditTrail'
+
+
 
 class TrailContainer extends Component {
     constructor(){
         super();
         this.state = {
             trails: [], // looking for all the trails available 
+            trailToEdit: {
+                id: null,
+              
+            }
         }
     }
 
@@ -48,24 +55,33 @@ e.preventDefault();
             })
         }
     }
-
-editTrail = async (id, trail) =>{    
-    const response = await fetch('http://localhost:9000/api/v1/trails/', {
+openEdit = (trail) => {
+    console.log(trail);
+    this.setState({
+        editFormOpen: true,
+        trailToEdit: trail
+    })
+}
+editTrail = async (trail, id) =>{    
+    console.log(id);
+    console.log(">>>>>>>>>>>>");
+    console.log(trail);
+    const editResponse = await fetch('http://localhost:9000/api/v1/trails/' + this.state.trailToEdit._id, {
         method: "PUT",
         body: JSON.stringify(trail),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-   const editedTrail = await response.json();
-   console.log(editedTrail);
-    if(response === 200){
+   const parsedResponse = await editResponse.json();
+//    console.log(editedTrail);
+    if(parsedResponse.status === 200){
         this.setState({
             trails: this.state.trails.map((trail)=>{
-                if(trail._id === id){
-                    return editedTrail
+                if(this.state.trailToEdit._id === id){
+                    return editResponse
                 }
-                return
+               
             })
         })
     }
@@ -101,7 +117,10 @@ deleteTrail = async (id) => {
                 <div className="formDiv">
                 <CreateTrailForm addTrail={this.addTrail}/>
                 </div>
-                <Trails trails={this.state.trails} deleteTrail={this.deleteTrail} editTrail={this.editTrail}/>
+                { this.state.editFormOpen ? <EditTrail trail={this.state.trailToEdit} editTrail={this.editTrail}/> : null }
+                
+               
+                <Trails trails={this.state.trails} deleteTrail={this.deleteTrail} editTrail={this.editTrail} openEdit={this.openEdit}/>
                
             </div>
         )
